@@ -1058,9 +1058,13 @@ a[class*=card]:hover .title {
   background-color: #fa3434;
 }
 
-.price {
+.found {
   font-weight: 600;
-  color: #212529;
+  color: #ff7300;
+}
+.missing {
+  font-weight: 600;
+  color: #ff0000;
 }
 
 .price-old {
