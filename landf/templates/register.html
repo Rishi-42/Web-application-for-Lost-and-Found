@@ -6,37 +6,42 @@
             <header class="mb-4">
                 <h3 class="card-title text-center">Sign up</h3>
             </header>
-            <form>
+            <form action="{% url 'register'%}" method="POST">
+                {% csrf_token %}
                 <div class="form-row">
                     <div class="col form-group">
                         <label>First name</label>
-                        <input type="text" class="form-control" placeholder="">
+                        {{ form.first_name }}
                     </div>
                     <div class="col form-group">
                         <label>Last name</label>
-                        <input type="text" class="form-control" placeholder="">
+                        {{ form.last_name }}
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col form-group">
                         <label>Username</label>
-                        <input type="text" class="form-control" placeholder="">
+                        {{ form.username }}
                     </div>
                     <div class="col form-group">
                         <label>Email</label>
-                        <input type="text" class="form-control" placeholder="">
+                        {{ form.email }}
                         <small class="form-text text-muted">Email won't be shared</small>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Create password</label>
-                        <input class="form-control" type="password">
+                        {{ form.password }}
                     </div>
                     <div class="form-group col-md-6">
                         <label>Repeat password</label>
-                        <input class="form-control" type="password">
+                        {{ form.re_password }}
                     </div>
+                    <div class="form-group">  
+                        {{ form.email.errors }}
+                      {{ form.non_field_errors }}
+                  </div>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Register</button>
