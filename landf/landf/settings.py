@@ -70,7 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'landf.wsgi.application'
-
+AUTH_USER_MODEL='accounts.Accounts'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

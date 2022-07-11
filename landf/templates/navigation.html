@@ -59,10 +59,16 @@
                             <div class="d-flex justify-content-end mb-3 mb-lg-0">
                                 <div class="widget-header">
                                     <small class="title text-muted text-center">Welcome</small>
+                                    {% if user.id is None %}
                                     <div>
-                                        <a href="./signin.html">Sign in</a> <span class="dark-transp">|</span>
-                                        <a href="./register.html">Register</a>
+                                        <a href="{% url 'signin' %}">Sign in</a> <span class="dark-transp">|</span>
+                                        <a href="{% url 'register' %}">Register</a>
                                     </div>
+                                    {% else %}
+                                    <div>
+                                        <a href="{% url 'register' %}">{{ user.first_name }}</a>
+                                    </div>
+                                    {% endif %}
                                 </div>
                                 <a href="./personalpost.html" class="widget-header pl-3 ml-3">
                                     <div class="icon icon-sm rounded-circle border">
