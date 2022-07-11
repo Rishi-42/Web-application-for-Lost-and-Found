@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from .models import Accounts
-from django.contrib import messages, auth
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
 # Create your views here.
 
 def register(request):
@@ -21,7 +22,7 @@ def register(request):
                 email=email,
                 password=password
             )
-            user.is_active=True
+            user.is_active = True
             user.save()
             messages.success(
                 request, 'Account is activated.'
@@ -38,9 +39,12 @@ def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(username=username, password=password)
+        print(username, password)
+        
+        user = authenticate(request, username=username, password=password)
+        print(user)
         if user is not None:
-            auth.login(request, user)
+            login(request, user)
             return redirect('home')
         else:
             messages.error(request, 'Invalid username or password')
