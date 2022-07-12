@@ -3,11 +3,11 @@ from accounts.models import Accounts
 
 class Feeds(models.Model):
     name = models.CharField(max_length=50, blank=True)
-    item_name = models.CharField(max_length=50)
+    item_name = models.CharField(max_length=25)
     item_image = models.ImageField(upload_to='images/items/', blank=True)
-    category = models.CharField(max_length=50)
-    location = models.CharField(max_length=50)
-    time = models.CharField(max_length=50)
+    category = models.CharField(max_length=25)
+    location = models.CharField(max_length=35)
+    time = models.CharField(max_length=20)
     descriptions = models.TextField()
     status = models.CharField(max_length=1)
     contact = models.CharField(max_length=20, blank=True)
