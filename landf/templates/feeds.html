@@ -109,47 +109,33 @@
                     </aside>
                     <main class="col-md-9">
                         <div class="row">
+                            {% for feed in feeds %}
                             <div class="col-md-4">
                                 <figure class="card card-product-grid">
                                     <div class="img-wrap">
-                                        <img src="{% static 'images/items/2.jpg' %}">
+                                        <img src="{{ feed.item_image.url }}">
                                     </div>
                                     <figcaption class="info-wrap">
                                         <div class="fix-height">
-                                            <a href="./product-detail.html" class="title font-weight-bold">Item Name font-weight-bold</a>
+                                            <a href="./product-detail.html" class="title font-weight-bold">{{ feed.item_name }}</a>
+                                            {% if feed.status == 'L'%}
+                                            <div class="missing mt-1">
+                                                Lost
+                                            </div> 
+                                            {% else %}
                                             <div class="found mt-1">
                                                 Found
                                             </div>
-                                            {% comment %} <div class="missing mt-1">
-                                                Lost
-                                            </div> {% endcomment %}
-                                            <p> 2022-10-2 </p>
+                                             
+                                            {% endif %}
+                                            <p>{{ feed.date_created.date }}</p>
                                         </div>
-                                        <a href="#" class="btn btn-block btn-outline-info">View details</a>
+                                        <a href="{{ feed.get_url }}" class="btn btn-block btn-outline-info">View details</a>
                                     </figcaption>
                                 </figure>
                             </div>
+                            {% endfor %}
                             
-                            <div class="col-md-4">
-                                <figure class="card card-product-grid">
-                                    <div class="img-wrap">
-                                        <img src="{% static 'images/items/1.jpg' %}">
-                                    </div>
-                                    <figcaption class="info-wrap">
-                                        <div class="fix-height">
-                                            <a href="./product-detail.html" class="title font-weight-bold">Item Name</a>
-                                            {% comment %} <div class="found mt-1">
-                                                Found
-                                            </div> {% endcomment %}
-                                            <div class="missing mt-1">
-                                                Lost
-                                            </div>
-                                            <p> 2022-10-2 </p>
-                                        </div>
-                                        <a href="#" class="btn btn-block btn-outline-info">View details</a>
-                                    </figcaption>
-                                </figure>
-                            </div>
                         </div>
                         <nav class="mt-4" aria-label="Page navigation sample">
                             <ul class="pagination">

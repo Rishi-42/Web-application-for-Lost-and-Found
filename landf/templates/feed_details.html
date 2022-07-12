@@ -10,30 +10,26 @@
                     <article class="gallery-wrap">
                         <div class="img-big-wrap">
                             <a href="#">
-                                <img src="{% static 'images/items/1.jpg' %}">
+                                <img src="{{ feed_detail.item_image.url }}">
                             </a>
                         </div>
                     </article>
                 </aside>
                 <main class="col-md-6 border-left">
                     <article class="content-body">
-                        <h2 class="title">Item Name</h2>
+                        <h2 class="title">{{ feed_detail.item_name }}</h2>
                         <div class="mb-3">
-                            <var class="h5">2022-10-22</var>
+                            <var class="h5">{{ feed_detail.date_created.date }}</var>
                         </div>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and scrambled it to make a type
-                            specimen book. It has survived not only five centuries, but also the leap into
-                            electronic typesetting, remaining essentially unchanged.
+                            {{feed_detail.descriptions}}
                         </p>
                         <hr>
                         <div class="row">
-                            <h6>Location: Approx location</h6>
+                            <h6>Location: {{feed_detail.location}}</h6>
                         </div>
                         <div class="row">
-                            <h6>Posted By: Hello</h6>
+                            <h6>Posted By: {{ feed_detail.name}}</h6>
                         </div>
                         <hr>
                         <a href="./product-detail.html" class="btn  btn-outline-warning"> <span class="text">Discuss</span> <i class="far fa-comments"></i> </a>
@@ -41,37 +37,43 @@
                 </main>
             </div>
         </div>
+        {% if similar_items %}
         <section class="section-name padding-y-sm">
             <div class="container">
                 <header class="section-heading">
                     <h3 class="section-title">Similar Feeds</h3>
                 </header>
                 <div class="row">
+                    {% for similar_item in similar_items %}
+                   
                     <div class="col-md-3">
                         <div class="card card-product-grid">
-                            <a href="./product-detail.html" class="img-wrap">
-                                <img src="{% static 'images/items/1.jpg' %}">
+                            <a href="{{ similar_item.get_url }}" class="img-wrap">
+                                <img src="{{ similar_item.item_image.url }}">
                             </a>
                             <figcaption class="info-wrap">
-                                <a href="./product-detail.html" class="title">lost item name</a>
-                                <div class="missing mt-1" style="color:green">Lost</div>
+                                <a href="{{ similar_item.get_url }}" class="title">{{ similar_item.item_name}}</a>
+
+                                {% if similar_item.status == 'L'%}
+                                            <div class="missing mt-1">
+                                                Lost
+                                            </div> 
+                                            {% else %}
+                                            <div class="found mt-1">
+                                                Found
+                                            </div>
+                                             
+                                            {% endif %}
+                                            <p>{{ similar_item.date_created.date }}</p>
                             </figcaption>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card card-product-grid">
-                            <a href="./product-detail.html" class="img-wrap">
-                                <img src="{% static 'images/items/2.jpg' %}">
-                            </a>
-                            <figcaption class="info-wrap">
-                                <a href="./product-detail.html" class="title">Found item</a>
-                                <div class="found mt-1">Found</div>
-                            </figcaption>
-                        </div>
-                    </div>
+                    
+                    {% endfor %}
                 </div>
             </div>
         </section>
+        {% endif %}
     </div>
 </section>
 {% endblock %}
