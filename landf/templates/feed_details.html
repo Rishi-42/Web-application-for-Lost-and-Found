@@ -1,0 +1,77 @@
+
+{% extends 'navigation.html'%}
+{% load static %}
+{% block start %}
+<section class="section-content padding-y bg">
+    <div class="container">
+        <div class="card">
+            <div class="row no-gutters">
+                <aside class="col-md-6">
+                    <article class="gallery-wrap">
+                        <div class="img-big-wrap">
+                            <a href="#">
+                                <img src="{% static 'images/items/1.jpg' %}">
+                            </a>
+                        </div>
+                    </article>
+                </aside>
+                <main class="col-md-6 border-left">
+                    <article class="content-body">
+                        <h2 class="title">Item Name</h2>
+                        <div class="mb-3">
+                            <var class="h5">2022-10-22</var>
+                        </div>
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and scrambled it to make a type
+                            specimen book. It has survived not only five centuries, but also the leap into
+                            electronic typesetting, remaining essentially unchanged.
+                        </p>
+                        <hr>
+                        <div class="row">
+                            <h6>Location: Approx location</h6>
+                        </div>
+                        <div class="row">
+                            <h6>Posted By: Hello</h6>
+                        </div>
+                        <hr>
+                        <a href="./product-detail.html" class="btn  btn-outline-warning"> <span class="text">Discuss</span> <i class="far fa-comments"></i> </a>
+                    </article>
+                </main>
+            </div>
+        </div>
+        <section class="section-name padding-y-sm">
+            <div class="container">
+                <header class="section-heading">
+                    <h3 class="section-title">Similar Feeds</h3>
+                </header>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card card-product-grid">
+                            <a href="./product-detail.html" class="img-wrap">
+                                <img src="{% static 'images/items/1.jpg' %}">
+                            </a>
+                            <figcaption class="info-wrap">
+                                <a href="./product-detail.html" class="title">lost item name</a>
+                                <div class="missing mt-1" style="color:green">Lost</div>
+                            </figcaption>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-product-grid">
+                            <a href="./product-detail.html" class="img-wrap">
+                                <img src="{% static 'images/items/2.jpg' %}">
+                            </a>
+                            <figcaption class="info-wrap">
+                                <a href="./product-detail.html" class="title">Found item</a>
+                                <div class="found mt-1">Found</div>
+                            </figcaption>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock %}
