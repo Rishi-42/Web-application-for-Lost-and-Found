@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from .models import Accounts
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
-# Create your views here.
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == 'POST':
@@ -51,5 +51,11 @@ def signin(request):
             return render(request, 'signin.html')
     return render(request, 'signin.html')
 
-def home(request):
-    return render(request, 'home.html')
+
+@login_required(login_url='signin')
+def signout(request):
+    logout(request)
+    messages.success(request, 'Successfully Logged Out.')
+    return render(request, 'signin.html')
+
+

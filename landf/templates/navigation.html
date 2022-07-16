@@ -8,10 +8,14 @@
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Lost and Found</title>
-        <link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
+        <link href="{% static 'images/favicon.ico' %}"
+              rel="shortcut icon"
+              type="image/x-icon">
         <script src="{% static 'js/jquery-2.0.0.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
-        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+        <link href="{% static 'css/bootstrap.css' %}"
+              rel="stylesheet"
+              type="text/css"/>
         <link href="{% static 'fonts/fontawesome/css/all.min.css' %}"
               type="text/css"
               rel="stylesheet">
@@ -35,18 +39,19 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-3 col-6">
-                            <a href="#" class="brand-wrap">
+                            <a href="{% url 'newsfeed' %}" class="brand-wrap">
                                 <img class="logo" src="{% static 'images/logo.png' %}">
                             </a>
                         </div>
-                        <a href="./feed.html" class="btn btn-outline-primary">Posts</a>
+                        <a href="{% url 'newsfeed' %}" class="btn btn-outline-primary">Posts</a>
                         <div class="col-lg  col-md-6 col-sm-12 col">
-                            <form action="#" class="search">
+                            <form action="{% url 'search' %}" class="search" method='GET'>
                                 <div class="input-group w-100">
                                     <input type="text"
                                            class="form-control"
                                            style="width:60%;"
-                                           placeholder="Search">
+                                           placeholder="Search"
+                                           name="keyword">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fa fa-search"></i>
@@ -60,33 +65,32 @@
                                 <div class="widget-header">
                                     <small class="title text-muted text-center">Welcome</small>
                                     {% if user.id is None %}
-                                    <div>
-                                        <a href="{% url 'signin' %}">Sign in</a> <span class="dark-transp">|</span>
-                                        <a href="{% url 'register' %}">Register</a>
-                                    </div>
+                                        <div>
+                                            <a href="{% url 'signin' %}">Sign in</a> <span class="dark-transp">|</span>
+                                            <a href="{% url 'register' %}">Register</a>
+                                        </div>
                                     {% else %}
-                                    <div>
-                                        <a href="{% url 'register' %}">{{ user.first_name }}</a>
+                                        <div class="text text-center">
+                                            <a href="{% url 'register' %}">{{ user.username }}</a>
+                                        </div>
                                     </div>
-                                    {% endif %}
-                                </div>
-                                <a href="./personalpost.html" class="widget-header pl-3 ml-3">
-                                    <div class="icon icon-sm rounded-circle border">
-                                        <i class="far fa-newspaper"></i>
-                                    </div>
-                                </a>
+                                    <a href="./personalpost.html" class="widget-header pl-3 ml-3">
+                                        <div class="icon icon-sm rounded-circle border">
+                                            <i class="far fa-newspaper"></i>
+                                        </div>
+                                    </a>
+                                    <a href="{% url 'signout' %}" class="widget-header pl-3 ml-3">
+                                        <div class="icon icon-sm ">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                        </div>
+                                    </a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
         </header>
-
-
-{% block start %}
-{% endblock %}
-
-
-
+        {% block start %}{% endblock %}
     </body>
 </html>

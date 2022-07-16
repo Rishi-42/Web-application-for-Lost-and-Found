@@ -1,0 +1,151 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block start %}
+    <section class="section-content padding-y">
+        <div class="container">
+            <div class="row">
+                <aside class="col-md-3">
+                    <div class="card">
+                        <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#"
+                                   data-toggle="collapse"
+                                   data-target="#collapse_1"
+                                   aria-expanded="true"
+                                   class="">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    <h6 class="title">Categories</h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse show" id="collapse_1" style="">
+                                <div class="card-body">
+                                    <ul class="list-menu">
+                                        {% for category in links %}
+                                            <li>
+                                                <a href="{% url 'newsfeed' %}{{ category.slug }}">{{ category.category_name }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#"
+                                   data-toggle="collapse"
+                                   data-target="#collapse_4"
+                                   aria-expanded="true"
+                                   class="">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    <h6 class="title">Status</h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse show" id="collapse_4" style="">
+                                <div class="card-body">
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light">Lost</span>
+                                    </label>
+                                    <label class="checkbox-btn">
+                                        <input type="checkbox">
+                                        <span class="btn btn-light">Found</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="filter-group">
+                            <header class="card-header">
+                                <a href="#"
+                                   data-toggle="collapse"
+                                   data-target="#collapse_3"
+                                   aria-expanded="true"
+                                   class="">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    <h6 class="title">Lost Date</h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse show" id="collapse_3" style="">
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>From</label>
+                                            <input type="date" class="form-control" style="font-size:11px">
+                                        </div>
+                                        <div class="form-group text-right col-md-6">
+                                            <label>Till</label>
+                                            <input type="date" class="form-control" style="font-size:11px">
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-block btn-primary">Apply</button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </aside>
+                <main class="col-md-9">
+                    <div class="row">
+                        {% for feed in feeds %}
+                            <div class="col-md-4">
+                                <figure class="card card-product-grid">
+                                    <div class="img-wrap">
+                                        <img src="{{ feed.item_image.url }}">
+                                    </div>
+                                    <figcaption class="info-wrap">
+                                        <div class="fix-height">
+                                            <a href="./product-detail.html" class="title font-weight-bold">{{ feed.item_name }}</a>
+                                            {% if feed.status == 'L' %}
+                                                <div class="missing mt-1">Lost</div>
+                                            {% else %}
+                                                <div class="found mt-1">Found</div>
+                                            {% endif %}
+                                            <p>
+                                                {{ feed.date_created.date }}
+                                            </p>
+                                        </div>
+                                        <a href="{{ feed.get_url }}" class="btn btn-block btn-outline-info">View details</a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <nav class="mt-4" aria-label="Page navigation sample">
+                        {% if feeds.has_other_pages %}
+                            <ul class="pagination">
+                                {% if feeds.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           href="?page={{ feeds.previous_page_number }}"
+                                           tabindex="-1"
+                                           aria-disabled="true">Previous</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                {% endif %}
+                                {% for page in feeds.paginator.page_range %}
+                                    {% if feeds.number == page %}
+                                        <li class="page-item active">
+                                            <a class="page-link active" href="#">{{ page }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if feeds.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ feeds.next_page_number }}">Next</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </nav>
+                </main>
+            </div>
+        {% endblock %}
