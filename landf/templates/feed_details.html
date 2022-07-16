@@ -1,79 +1,82 @@
-
-{% extends 'navigation.html'%}
+{% extends 'navigation.html' %}
 {% load static %}
 {% block start %}
-<section class="section-content padding-y bg">
-    <div class="container">
-        <div class="card">
-            <div class="row no-gutters">
-                <aside class="col-md-6">
-                    <article class="gallery-wrap">
-                        <div class="img-big-wrap">
-                            <a href="#">
-                                <img src="{{ feed_detail.item_image.url }}">
-                            </a>
-                        </div>
-                    </article>
-                </aside>
-                <main class="col-md-6 border-left">
-                    <article class="content-body">
-                        <h2 class="title">{{ feed_detail.item_name }}</h2>
-                        <div class="mb-3">
-                            <var class="h5">{{ feed_detail.date_created.date }}</var>
-                        </div>
-                        <p>
-                            {{feed_detail.descriptions}}
-                        </p>
-                        <hr>
-                        <div class="row">
-                            <h6>Location: {{feed_detail.location}}</h6>
-                        </div>
-                        <div class="row">
-                            <h6>Posted By: {{ feed_detail.name}}</h6>
-                        </div>
-                        <hr>
-                        <a href="./product-detail.html" class="btn  btn-outline-warning"> <span class="text">Discuss</span> <i class="far fa-comments"></i> </a>
-                    </article>
-                </main>
-            </div>
-        </div>
-        {% if similar_items %}
-        <section class="section-name padding-y-sm">
-            <div class="container">
-                <header class="section-heading">
-                    <h3 class="section-title">Similar Feeds</h3>
-                </header>
-                <div class="row">
-                    {% for similar_item in similar_items %}
-                   
-                    <div class="col-md-3">
-                        <div class="card card-product-grid">
-                            <a href="{{ similar_item.get_url }}" class="img-wrap">
-                                <img src="{{ similar_item.item_image.url }}">
-                            </a>
-                            <figcaption class="info-wrap">
-                                <a href="{{ similar_item.get_url }}" class="title">{{ similar_item.item_name}}</a>
-
-                                {% if similar_item.status == 'L'%}
-                                            <div class="missing mt-1">
-                                                Lost
-                                            </div> 
-                                            {% else %}
-                                            <div class="found mt-1">
-                                                Found
-                                            </div>
-                                             
-                                            {% endif %}
-                                            <p>{{ similar_item.date_created.date }}</p>
-                            </figcaption>
-                        </div>
-                    </div>
-                    
-                    {% endfor %}
+    <section class="section-content padding-y bg">
+        <div class="container">
+            <div class="card">
+                <div class="row no-gutters">
+                    <aside class="col-md-6">
+                        <article class="gallery-wrap">
+                            <div class="img-big-wrap">
+                                <a href="#">
+                                    <img src="{{ feed_detail.item_image.url }}">
+                                </a>
+                            </div>
+                        </article>
+                    </aside>
+                    <main class="col-md-6 border-left">
+                        <article class="content-body">
+                            <h2 class="title">{{ feed_detail.item_name }}</h2>
+                            <div class="mb-3">
+                                <var class="h5">{{ feed_detail.date_created.date }}</var>
+                            </div>
+                            <p>
+                                {{ feed_detail.descriptions }}
+                            </p>
+                            <hr>
+                            <div class="row">
+                                <h6>
+                                    Status:  &nbsp;
+                                    {% if feed_detail.status == 'L' %}
+                                        <h6 class="missing">Lost</h6>
+                                    {% else %}
+                                        <h6 class="found">Found</h6>
+                                    {% endif %}
+                                </h6>
+                            </div>
+                            <div class="row">
+                                <h6>Location: {{ feed_detail.location }}</h6>
+                            </div>
+                            <div class="row">
+                                <h6>Posted By: {{ feed_detail.name }}</h6>
+                            </div>
+                            <hr>
+                            <a href="./product-detail.html" class="btn  btn-outline-warning"> <span class="text">Discuss</span> <i class="far fa-comments"></i> </a>
+                        </article>
+                    </main>
                 </div>
             </div>
-        </section>
-        {% endif %}
-    </div>
-</section>
+            {% if similar_items %}
+                <section class="section-name padding-y-sm">
+                    <div class="container">
+                        <header class="section-heading">
+                            <h3 class="section-title">Similar Feeds</h3>
+                        </header>
+                        <div class="row">
+                            {% for similar_item in similar_items %}
+                                <div class="col-md-3">
+                                    <div class="card card-product-grid">
+                                        <a href="{{ similar_item.get_url }}" class="img-wrap">
+                                            <img src="{{ similar_item.item_image.url }}">
+                                        </a>
+                                        <figcaption class="info-wrap">
+                                            <a href="{{ similar_item.get_url }}" class="title">{{ similar_item.item_name }}</a>
+                                            {% if similar_item.status == 'L' %}
+                                                <div class="missing mt-1">Lost</div>
+                                            {% else %}
+                                                <div class="found mt-1">Found</div>
+                                            {% endif %}
+                                            <p>
+                                                {{ similar_item.date_created.date }}
+                                            </p>
+                                        </figcaption>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}
