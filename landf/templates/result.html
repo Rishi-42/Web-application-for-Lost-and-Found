@@ -1,0 +1,33 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block start %}
+    <section class="section-name padding-y-sm">
+        <div class="container">
+            <header class="section-heading">
+                <h3 class="section-title">Search Result</h3>
+            </header>
+            <div class="row">
+                {% for feed in feeds %}
+                    <div class="col-md-3">
+                        <div class="card card-product-grid">
+                            <a href="{{ feed.get_url }}" class="img-wrap">
+                                <img src="{{ feed.item_image.url }}">
+                            </a>
+                            <figcaption class="info-wrap">
+                                <a href="{{ feed.get_url }}" class="title">{{ feed.item_name }}</a>
+                                {% if feed.status == 'L' %}
+                                    <div class="missing mt-1">Lost</div>
+                                {% else %}
+                                    <div class="found mt-1">Found</div>
+                                {% endif %}
+                                <p>
+                                    {{ feed.date_created.date }}
+                                </p>
+                            </figcaption>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
