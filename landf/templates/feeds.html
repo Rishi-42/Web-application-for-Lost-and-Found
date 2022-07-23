@@ -92,7 +92,7 @@
                                     </div>
                                     <figcaption class="info-wrap">
                                         <div class="fix-height">
-                                            <a href="./product-detail.html" class="title font-weight-bold">{{ feed.item_name }}</a>
+                                            <a href="{{ feed.get_url }}" class="title font-weight-bold">{{ feed.item_name }}</a>
                                             {% if feed.status == 'L' %}
                                                 <div class="missing mt-1">Lost</div>
                                             {% else %}

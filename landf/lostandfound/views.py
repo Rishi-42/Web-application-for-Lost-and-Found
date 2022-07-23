@@ -4,7 +4,11 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 
 def home(request):
-    return render(request, 'home.html')
+    recent = Feeds.objects.all().order_by('-date_created')[:10]
+    contexts ={
+        'feeds' : recent
+    }
+    return render(request, 'home.html', contexts)
 
 def search(request):
     if 'keyword' in request.GET:

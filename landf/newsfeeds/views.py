@@ -6,6 +6,7 @@ def newsfeed(request, category_slug=None):
     if category_slug != None:
         c_id = Category.objects.get(slug=category_slug).id
         feeds= Feeds.objects.filter(category_id=c_id)
+        
         paginator = Paginator(feeds, 12)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)

@@ -1,0 +1,86 @@
+{% extends 'side_nav.html' %}
+{% block nav %}
+<style>
+        .form-control{
+        overflow: auto;
+        resize: vertical;
+        display: block;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.37rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        resize: none;
+    
+    
+        }
+    </style>
+    <aside class="col-lg-9">
+        <div class="card">
+            <div class="card-body">
+                <header class="mb-4">
+                    <h3 class="card-title text-center">Create Post</h3>
+                </header>
+                <form action="{% url 'add_post' %}" method="POST" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>Item Name</label>
+                            {{form.item_name}}
+                        </div>
+                        <div class="col form-group">
+                            <label>Image</label>
+                            {{form.item_image}}
+                        </div>
+                        <div class="col form-group">
+                            <label>Your name</label>
+                            {{form.name}}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>Location</label>
+                            {{form.location}}
+                        </div>
+                        <div class="col form-group">
+                            <label>Time</label>
+                            {{form.time}}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>Category</label>
+                            {{form.category}}
+                        </div>
+                        <div class="col form-group">
+                            <label>Status</label>
+                            {{form.status}}
+                        </div>
+                        <div class="col form-group">
+                            <label>Contact</label>
+                            {{form.contact}}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12" row='3'>
+                            <label>Description</label>
+                            {{form.descriptions}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form.term }}
+                        <span>&nbsp; I agree the <a href="#">term and condition.</a> </span>
+                    </div>
+                    <div class="form-group">
+                        {{ formset.errors }}{{ formset.non_field_errors }} {{ form.errors }} {{ form.non_field_errors }}{{ formset.non_form_errors }}
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </aside>
+{% endblock %}

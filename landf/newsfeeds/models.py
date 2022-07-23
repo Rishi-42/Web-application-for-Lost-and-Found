@@ -19,6 +19,8 @@ class Feeds(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['id']
     
     def __str__(self):
         return self.item_name

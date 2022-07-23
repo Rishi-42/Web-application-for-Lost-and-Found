@@ -6,31 +6,33 @@
             <header class="section-heading">
                 <a href="{% url 'newsfeed' %}"
                    class="btn btn-outline-primary float-right">See all</a>
-                <h3 class="section-title">Recently added Posts</h3>
+                <h3 class="section-title">Latest Posts</h3>
             </header>
             <div class="row">
+                {% for feed in feeds %}
                 <div class="col-md-3">
                     <div class="card card-product-grid">
-                        <a href="./product-detail.html" class="img-wrap">
-                            <img src="{% static 'images/items/1.jpg' %}">
+                        <a href="{{ feed.get_url }}" class="img-wrap">
+                            <img src="{{ feed.item_image.url }}">
                         </a>
                         <figcaption class="info-wrap">
-                            <a href="./product-detail.html" class="title">lost item name</a>
-                            <div class="missing mt-1" style="color:green">Lost</div>
+                            <div class="fix-height">
+                                <a href="{{ feed.get_url }}" class="title font-weight-bold">{{ feed.item_name }}</a>
+                                {% if feed.status == 'L' %}
+                                    <div class="missing mt-1">Lost</div>
+                                {% else %}
+                                    <div class="found mt-1">Found</div>
+                                {% endif %}
+                                <p>
+                                    {{ feed.date_created.date }} | {{ feed.date_created.time }}
+                                </p>
+                                
+                            </div>
                         </figcaption>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card card-product-grid">
-                        <a href="./product-detail.html" class="img-wrap">
-                            <img src="{% static 'images/items/2.jpg' %}">
-                        </a>
-                        <figcaption class="info-wrap">
-                            <a href="./product-detail.html" class="title">Found item</a>
-                            <div class="found mt-1">Found</div>
-                        </figcaption>
-                    </div>
-                </div>
+                {% endfor %}
+                
             </div>
         </div>
     </section>
