@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from newsfeeds.models import Feeds
+from backend.newsfeeds.models import Feeds
 from django.core.paginator import Paginator
 from django.db.models import Q
 

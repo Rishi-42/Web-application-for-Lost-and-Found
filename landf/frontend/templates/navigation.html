@@ -3,7 +3,6 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="pragma" content="no-cache" />
         <meta http-equiv="cache-control" content="max-age=604800" />
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -38,31 +37,24 @@
             <section class="header-main border-bottom">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-3 col-6">
+                        <div class="col-lg-3
+                         col-md-3 col-6">
                             <a href="{% url 'newsfeed' %}" class="brand-wrap">
                                 <img class="logo" src="{% static 'images/logo.png' %}">
                             </a>
                         </div>
-                        <a href="{% url 'newsfeed' %}" class="btn btn-outline-primary">Posts</a>
-                        <div class="col-lg  col-md-6 col-sm-12 col">
-                            <form action="{% url 'search' %}" class="search" method='GET'>
-                                <div class="input-group w-100">
-                                    <input type="text"
-                                           class="form-control"
-                                           style="width:60%;"
-                                           placeholder="Search"
-                                           name="keyword">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
-                            <div class="d-flex justify-content-end mb-3 mb-lg-0">
-                                <div class="widget-header">
+                    <div class="col-lg-2 col-md-3 col-6">
+                        <a href="{% url 'newsfeed' %}" >Posts</a>
+                    </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                        <a href="{% url 'newsfeed' %}" >Posts</a>
+                    </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                        <a href="{% url 'newsfeed' %}" >Posts</a>
+                    </div>
+                        
+                        <div class="col-lg-2 col-md-3 col-6">
+                            <div class="d-flex justify-content-end">
                                     <small class="title text-muted text-center">Welcome</small>
                                     {% if user.id is None %}
                                         <div>

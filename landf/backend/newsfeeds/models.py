@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import Accounts
+from backend.accounts.models import Accounts
 from .slug_generaters import slug_generater, category_slug_generater
 from django.urls import reverse
 

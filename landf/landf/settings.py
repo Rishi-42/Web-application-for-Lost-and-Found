@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
-    'lostandfound',
-    'newsfeeds',
-    'dashboard',
+    'backend.accounts',
+    'backend.lostandfound',
+    'backend.newsfeeds',
+    'backend.dashboard',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'landf.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR / "frontend" / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,7 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'newsfeeds.category_content.category_link',
+                'backend.newsfeeds.category_content.category_link',
             ],
         },
     },
@@ -123,9 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
-    'landf/static'
+    BASE_DIR / "frontend" / "static",
 ]
 
 MEDIA_URL = '/media/'

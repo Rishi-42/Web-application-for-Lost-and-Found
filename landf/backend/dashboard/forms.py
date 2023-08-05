@@ -1,5 +1,5 @@
 from django import forms
-from newsfeeds.models import Feeds
+from backend.newsfeeds.models import Feeds
 
 class AddPostForm(forms.ModelForm):
     STATUS_CHOICES = [

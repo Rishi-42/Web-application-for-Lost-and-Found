@@ -2,8 +2,8 @@ from ast import Add
 from unicodedata import category
 from django.shortcuts import render, redirect
 from .forms import AddPostForm
-from newsfeeds.models import Feeds
-from accounts.models import Accounts
+from backend.newsfeeds.models import Feeds
+from backend.accounts.models import Accounts
 
 def dashboard(request):
     return render(request, 'add_feed.html')
